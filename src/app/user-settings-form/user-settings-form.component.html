@@ -1,27 +1,67 @@
 <div class="container">
   <h2>User Settings</h2>
-    <form>
+    <form #form="ngForm">
+      <!-- for attribute and id attribute in input needs to match to enable click focus -->
       <div class="form-group">
         <label for="name">Name</label>
-        <input id="name" name="name" class="form-control" />
+        <input id="name" name="name" class="form-control" ngModel />
       </div>
+      <!-- form group class is used for spacing -->
       <div class="form-check form-group">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        <input class="form-check-input" name="emailOffers" type="checkbox" value="" id="defaultCheck1" ngModel>
         <label class="form-check-label" for="defaultCheck1">
           Default checkbox
         </label>
       </div>
 
-      <h5>User Interface Style</h5>
+      <p>User Interface Style</p>
+      <!-- Multiple radio box needs to use the same name attribute for grouping -->
       <div class="form-group">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Default radio
+            <input class="form-check-input" type="radio" name="radio" id="lightInterface" value="option1" checked ngModel>
+            <label class="form-check-label" for="lightInterface">
+              Light
             </label>
           </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio" id="mediumInterface" value="option2" ngModel>
+            <label class="form-check-label" for="mediumInterface">
+              Medium
+            </label>
+          </div>
+
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" id="darkInterface" value="option3" ngModel>
+              <label class="form-check-label" for="darkInterface">
+                Dark
+              </label>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for="subscriptionType">Subscription Type</label>
+        <select class="form-control" id="subscriptionType" name="subscriptionType" ngModel>
+          <option>Monthly</option>
+          <option>Annual</option>
+          <option>Lifetime</option>
+        </select>
       </div>
 
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" class="form-control" row="3"  ngModel></textarea>
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control"/>
+      </div>
+
+      <div class="form-group">
+          <label for="testing">Password</label>
+          <input type="date" id="testing" name="testing" class="form-control"/>
+        </div> -->
       <button class="btn btn-primary">send</button>
     </form>
 </div>
+
+{{form.value | json}}
