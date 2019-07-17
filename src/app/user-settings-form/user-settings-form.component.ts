@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { UserSettings } from '../data/user-settings';
 import { NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-settings-form',
@@ -10,6 +11,10 @@ import { DataService } from '../data/data.service';
 })
 export class UserSettingsFormComponent implements OnInit {
 
+  isInputError:boolean=false;
+  ErrorMsg:string;
+  isServerError:boolean=false;
+  subscriptionTypes:Observable<string[]>;
   originalUserSettings:UserSettings={
     name:null,
     emailOffers:null,
@@ -20,9 +25,12 @@ export class UserSettingsFormComponent implements OnInit {
   };
 
   userSettings:UserSettings={...this.originalUserSettings};
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService) {
+
+  }
 
   ngOnInit() {
+    this.subscriptionTypes=this.dataService.getSubscriptionTypes();
   }
 
   onBlur(field:NgModel)
@@ -30,12 +38,30 @@ export class UserSettingsFormComponent implements OnInit {
     console.log('BLUR:',field.valid);
   }
 
+  ErrorHandling(error:any)
+  {
+    console.log('error: ',error);
+    this.isServerError=true;
+    this.ErrorMsg=error.error.errorMessage;
+  }
+
   onSubmit(form:NgForm) {
+
+    if (form.valid)
+    {
+      this.isInputError=false;
+      this.isServerError=false;
     console.log('in onSubmit form validity: ', form.valid,' nameField validity:');
     this.dataService.postUserSettingsForm(this.userSettings).subscribe(
       result=>console.log('success: ',result),
-      error=>console.log('error: ',error)
+      error=>this.ErrorHandling(error)
     );
+    }
+    else
+    {
+      this.isInputError=true;
+      this.ErrorMsg="please correct errors first before submit."
+    }
   }
 
 }

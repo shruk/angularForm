@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { UserSettings } from './user-settings';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() { }
 
-  postUserSettingsForm(userSettings: UserSettings) : Observable<UserSettings>{
-      return of(userSettings);
+  constructor(private http:HttpClient) { }
+
+  getSubscriptionTypes(): Observable<string[]> {
+    return of(['one','two','three']);
+  }
+
+  postUserSettingsForm(userSettings: UserSettings) : Observable<any>{
+    return this.http.post('https://putsreq.com/vKdkV4Q024ZzXqii1mP8',userSettings);
+    //return of(userSettings);
   }
 }
