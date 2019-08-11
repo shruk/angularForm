@@ -12,8 +12,11 @@
         </div>
       </div>
 
-
-
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+      <input type="text" placeholder="Datepicker" class="form-control" [(ngModel)]="startDate" name="startDate" id="startDate" bsDatepicker>
+      </div>
+      Start Date: {{startDate}}
       <!-- form group class is used for spacing -->
       <div class="form-check form-group">
         <input class="form-check-input" name="emailOffers" type="checkbox" value="" id="defaultCheck1" [(ngModel)]="userSettings.emailOffers">
@@ -29,33 +32,11 @@
 
           <div class="btn-group">
               <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="radio"
-                     btnRadio="Left" tabindex="0" role="button">Light</label>
+                     btnRadio="Light" tabindex="0" role="button">Light</label>
               <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="radio"
-                     btnRadio="Middle" tabindex="0" role="button">Medium</label>
+                     btnRadio="Medium" tabindex="0" role="button">Medium</label>
               <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="radio"
-                     btnRadio="Right" tabindex="0" role="button">Dark</label>
-            </div>
-
-
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="lightInterface" value="Light" checked [(ngModel)]="userSettings.interfaceStyle">
-            <label class="form-check-label" for="lightInterface">
-              Light
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="mediumInterface" value="Medium" [(ngModel)]="userSettings.interfaceStyle">
-            <label class="form-check-label" for="mediumInterface">
-              Medium
-            </label>
-          </div>
-
-          <div class="form-check">
-              <input class="form-check-input" type="radio" name="radio" id="darkInterface" value="Dark" [(ngModel)]="userSettings.interfaceStyle">
-              <label class="form-check-label" for="darkInterface">
-                Dark
-              </label>
+                     btnRadio="Dark" tabindex="0" role="button">Dark</label>
             </div>
       </div>
       <div class="form-group">

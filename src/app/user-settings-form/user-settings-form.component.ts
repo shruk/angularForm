@@ -15,6 +15,7 @@ export class UserSettingsFormComponent implements OnInit {
   ErrorMsg:string;
   isServerError:boolean=false;
   subscriptionTypes:Observable<string[]>;
+  startDate:Date;
   originalUserSettings:UserSettings={
     name:null,
     emailOffers:null,
@@ -31,6 +32,7 @@ export class UserSettingsFormComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptionTypes=this.dataService.getSubscriptionTypes();
+    this.startDate=new Date();
   }
 
   onBlur(field:NgModel)
@@ -46,12 +48,12 @@ export class UserSettingsFormComponent implements OnInit {
   }
 
   onSubmit(form:NgForm) {
-
+    console.log('in onSubmit form validity: ', form.valid,' value :',form.value);
     if (form.valid)
     {
       this.isInputError=false;
       this.isServerError=false;
-    console.log('in onSubmit form validity: ', form.valid,' nameField validity:');
+
     this.dataService.postUserSettingsForm(this.userSettings).subscribe(
       result=>console.log('success: ',result),
       error=>this.ErrorHandling(error)
